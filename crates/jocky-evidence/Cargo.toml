@@ -1,0 +1,16 @@
+[package]
+name = "jocky-evidence"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+description = "Evidence integrity engine with hash chains, provenance, and HMAC attestation"
+
+[dependencies]
+serde = { workspace = true }
+serde_json = { workspace = true }
+chrono = { workspace = true }
+sha2 = { workspace = true }
+hmac = { workspace = true }
+hex = { workspace = true }
+thiserror = { workspace = true }

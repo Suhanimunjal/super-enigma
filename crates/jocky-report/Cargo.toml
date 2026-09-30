@@ -1,0 +1,16 @@
+[package]
+name = "jocky-report"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+description = "Automated forensic report generator producing HTML, JSON, and Markdown deliverables"
+
+[dependencies]
+serde = { workspace = true }
+serde_json = { workspace = true }
+chrono = { workspace = true }
+jocky-evidence = { path = "../jocky-evidence" }
+jocky-detection = { path = "../jocky-detection" }
+jocky-timeline = { path = "../jocky-timeline" }
+jocky-forensics = { path = "../jocky-forensics" }

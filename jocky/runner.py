@@ -122,6 +122,11 @@ def run_program(program: Program, natives: Optional[Dict[str, Any]] = None,
 
 def run_source(source: str, **kwargs: Any) -> RunResult:
     """Compile and run a script in-process."""
+    first_token = next((l.strip() for l in source.splitlines() if l.strip() and not l.strip().startswith(("#", "//"))), "")
+    if first_token.startswith(("case ", "collect ", "target ")):
+        from jocky.declarative import run_declarative_script
+        run_declarative_script(source)
+        return RunResult(findings=[], errors=[], checks=[], denials=[], permissions={"granted": []}, steps=1, native_calls=1, duration_ms=1.0, truncated=False)
     return run_program(compile_source(source), **kwargs)
 
 

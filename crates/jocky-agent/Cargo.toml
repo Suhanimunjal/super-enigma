@@ -1,0 +1,20 @@
+[package]
+name = "jocky-agent"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+description = "Native Rust forensics agent and job executor for JOCKY"
+
+[dependencies]
+serde = { workspace = true }
+serde_json = { workspace = true }
+thiserror = { workspace = true }
+chrono = { workspace = true }
+sha2 = { workspace = true }
+hex = { workspace = true }
+jocky-compiler = { path = "../jocky-compiler" }
+jocky-runtime = { path = "../jocky-runtime" }
+jocky-evidence = { path = "../jocky-evidence" }
+jocky-forensics = { path = "../jocky-forensics" }
+jocky-report = { path = "../jocky-report" }

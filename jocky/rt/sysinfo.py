@@ -59,6 +59,13 @@ def distro() -> Dict[str, str]:
                     fields[key.strip()] = value.strip().strip('"')
     except OSError:
         pass
+    if not fields:
+        fields = {
+            "ID": platform.system().lower(),
+            "NAME": f"{platform.system()} {platform.release()}",
+            "PRETTY_NAME": f"{platform.system()} {platform.release()} ({platform.version()})",
+            "VERSION": platform.version(),
+        }
     return fields
 
 
@@ -88,6 +95,33 @@ def memory() -> Dict[str, int]:
                         continue
     except OSError:
         pass
+    if not out and os.name == "nt":
+        try:
+            import ctypes
+
+            class _MEMORYSTATUSEX(ctypes.Structure):
+                _fields_ = [
+                    ("dwLength", ctypes.c_ulong),
+                    ("dwMemoryLoad", ctypes.c_ulong),
+                    ("ullTotalPhys", ctypes.c_ulonglong),
+                    ("ullAvailPhys", ctypes.c_ulonglong),
+                    ("ullTotalPageFile", ctypes.c_ulonglong),
+                    ("ullAvailPageFile", ctypes.c_ulonglong),
+                    ("ullTotalVirtual", ctypes.c_ulonglong),
+                    ("ullAvailVirtual", ctypes.c_ulonglong),
+                    ("ullAvailExtendedVirtual", ctypes.c_ulonglong),
+                ]
+
+            stat = _MEMORYSTATUSEX()
+            stat.dwLength = ctypes.sizeof(_MEMORYSTATUSEX)
+            if ctypes.windll.kernel32.GlobalMemoryStatusEx(ctypes.byref(stat)):
+                out["MemTotal"] = int(stat.ullTotalPhys)
+                out["MemFree"] = int(stat.ullAvailPhys)
+                out["MemAvailable"] = int(stat.ullAvailPhys)
+                out["SwapTotal"] = int(stat.ullTotalPageFile)
+                out["SwapFree"] = int(stat.ullAvailPageFile)
+        except Exception:
+            pass
     return out
 
 
@@ -103,7 +137,7 @@ def cpu() -> Dict[str, Any]:
                     count += 1
     except OSError:
         pass
-    return {"model": model, "cpus": count or os.cpu_count()}
+    return {"model": model, "cpus": count or os.cpu_count() or 1}
 
 
 def mounts() -> List[Dict[str, Any]]:
@@ -128,7 +162,19 @@ def mounts() -> List[Dict[str, Any]]:
                     "readonly": "ro" in opt_set,
                 })
     except OSError:
-        return out
+        pass
+    if not out and os.name == "nt" and hasattr(os, "listdrives"):
+        for d in os.listdrives():
+            out.append({
+                "device": d,
+                "mountpoint": d,
+                "fstype": "ntfs",
+                "options": "rw",
+                "noexec": False,
+                "nosuid": False,
+                "nodev": False,
+                "readonly": False,
+            })
     return out
 
 

@@ -1,0 +1,17 @@
+[package]
+name = "jocky-server"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+description = "Native Rust central management server and REST API for JOCKY"
+
+[dependencies]
+serde = { workspace = true }
+serde_json = { workspace = true }
+thiserror = { workspace = true }
+chrono = { workspace = true }
+sha2 = { workspace = true }
+hex = { workspace = true }
+jocky-evidence = { path = "../jocky-evidence" }
+jocky-report = { path = "../jocky-report" }

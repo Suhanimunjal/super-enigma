@@ -30,6 +30,7 @@ import csv
 import hashlib
 import json
 import os
+import platform
 import shutil
 import statistics
 import subprocess
@@ -353,7 +354,7 @@ def _write_report(out_dir: str, stages: Dict[str, Any], quick: bool) -> str:
         "# JOCKY evidence report (SIH26148)",
         "",
         f"Generated: {time.strftime('%Y-%m-%d %H:%M:%S')}",
-        f"Host: {os.uname().nodename} · kernel {os.uname().release} · "
+        f"Host: {platform.uname().node} · kernel {platform.uname().release} · "
         f"python {sys.version.split()[0]}",
         f"Mode: {'quick' if quick else 'full'}",
         "",

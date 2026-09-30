@@ -324,6 +324,10 @@ def _check_management(report: Report) -> None:
                   group="management")
         )
     openssl = shutil.which("openssl")
+    if not openssl and os.name == "nt":
+        git_openssl = r"C:\Program Files\Git\usr\bin\openssl.exe"
+        if os.path.exists(git_openssl):
+            openssl = git_openssl
     if openssl:
         report.checks.append(Check("openssl binary", OK, openssl, group="management"))
     else:

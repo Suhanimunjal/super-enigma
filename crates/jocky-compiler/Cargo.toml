@@ -1,0 +1,14 @@
+[package]
+name = "jocky-compiler"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+description = "Compiler for transforming JOCKY AST to Forensic IR"
+
+[dependencies]
+thiserror = { workspace = true }
+serde_json = { workspace = true }
+jocky-ast = { path = "../jocky-ast" }
+jocky-parser = { path = "../jocky-parser" }
+jocky-ir = { path = "../jocky-ir" }

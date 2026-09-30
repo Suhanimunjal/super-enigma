@@ -1,0 +1,35 @@
+[workspace]
+resolver = "2"
+members = [
+    "crates/jocky-ast",
+    "crates/jocky-lexer",
+    "crates/jocky-parser",
+    "crates/jocky-ir",
+    "crates/jocky-compiler",
+    "crates/jocky-runtime",
+    "crates/jocky-forensics",
+    "crates/jocky-evidence",
+    "crates/jocky-detection",
+    "crates/jocky-timeline",
+    "crates/jocky-report",
+    "crates/jocky-server",
+    "crates/jocky-agent",
+    "crates/jocky-cli",
+]
+
+[workspace.package]
+version = "2.0.0"
+edition = "2021"
+authors = ["JOCKY Forensics Team"]
+license = "MIT"
+description = "Industrial-grade forensic scripting language, compiler, runtime, and investigation platform"
+
+[workspace.dependencies]
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+thiserror = "1.0"
+chrono = { version = "=0.4.38", default-features = false, features = ["clock", "std", "serde"] }
+sha2 = "0.10"
+hmac = "0.12"
+hex = "0.4"
+tokio = { version = "1.38", features = ["full"] }

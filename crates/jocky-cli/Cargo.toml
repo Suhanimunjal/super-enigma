@@ -1,0 +1,24 @@
+[package]
+name = "jocky-cli"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+description = "Command-line interface for JOCKY 2.0 Digital Forensics Platform"
+
+[[bin]]
+name = "jocky"
+path = "src/main.rs"
+
+[dependencies]
+thiserror = { workspace = true }
+serde_json = { workspace = true }
+jocky-ast = { path = "../jocky-ast" }
+jocky-lexer = { path = "../jocky-lexer" }
+jocky-parser = { path = "../jocky-parser" }
+jocky-ir = { path = "../jocky-ir" }
+jocky-compiler = { path = "../jocky-compiler" }
+jocky-runtime = { path = "../jocky-runtime" }
+jocky-evidence = { path = "../jocky-evidence" }
+jocky-server = { path = "../jocky-server" }
+jocky-agent = { path = "../jocky-agent" }

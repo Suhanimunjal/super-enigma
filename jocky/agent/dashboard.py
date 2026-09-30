@@ -219,7 +219,10 @@ footer { max-width: 1200px; margin: 0 auto; padding: 0 20px 34px; color: #6f7a90
 </head>
 <body>
 <header class="top">
-  <div class="brand">JOCKY<small>central management console</small></div>
+  <div class="brand" style="display:flex;align-items:center;gap:10px">
+    <div style="width:32px;height:32px;background:linear-gradient(135deg,#2c5aa8,#0ea5e9);border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;color:#fff;flex-shrink:0">J</div>
+    <div>JOCKY<small>Next-Gen Forensics Platform · v2.1 Rust Edition</small></div>
+  </div>
   <div class="spacer"></div>
   <span class="pill" id="version-pill">version unknown</span>
   <span class="pill off" id="conn-pill">disconnected</span>
@@ -247,6 +250,16 @@ footer { max-width: 1200px; margin: 0 auto; padding: 0 20px 34px; color: #6f7a90
       The token is stored in this browser only and sent as the X-JKY-Token header.
       This page is served without one; it carries no case data by itself.
     </p>
+  </section>
+
+  <!-- ── Investigations Section (JOCKY 2.1) ──────────────────────────────── -->
+  <section id="investigations-section">
+    <h2>Investigations <span class="dim" id="investigations-count"></span>
+      <button type="button" class="link" style="margin-left:12px;font-size:11px" onclick="refreshInvestigations()">↻ refresh</button>
+    </h2>
+    <div id="investigations-list">
+      <div style="color:var(--muted);font-size:13px;padding:8px 0">Loading investigations…</div>
+    </div>
   </section>
 
   <section>
@@ -644,6 +657,89 @@ function renderStatus(status) {
   byId("status-meta").textContent = "server time: " + shown(data.server_time);
 }
 
+/* -------------------------------------------------------- investigations panel */
+function renderInvestigations(payload) {
+  var container = byId("investigations-list");
+  if (!container) return;
+  var list = payload && Array.isArray(payload.investigations) ? payload.investigations : [];
+  var countEl = byId("investigations-count");
+  if (countEl) countEl.textContent = "(" + list.length + " total)";
+  container.replaceChildren();
+  if (!list.length) {
+    container.appendChild(el("div", {
+      style: "color:var(--muted);font-size:13px;padding:12px 0",
+      text: "No investigations recorded yet. Run 'jocky run scripts/incident_response.jky' to launch an investigation."
+    }));
+    return;
+  }
+  var grid = el("div", {style: "display:grid;grid-template-columns:repeat(auto-fill, minmax(320px, 1fr));gap:16px;margin-top:12px"});
+  list.forEach(function(inv) {
+    var card = el("div", {class: "panel", style: "border:1px solid #1e293b;background:#0f172a;border-radius:10px;padding:18px;display:flex;flex-direction:column;gap:12px;box-shadow:0 4px 12px rgba(0,0,0,0.3)"});
+    
+    var head = el("div", {style: "display:flex;justify-content:space-between;align-items:center"});
+    var title = el("div", {style: "font-weight:700;font-size:15px;color:#38bdf8;font-family:monospace", text: shown(inv.case_id || "INVESTIGATION")});
+    var statusPill = el("span", {
+      class: "pill " + (inv.status === "verified" || inv.status === "completed" ? "on" : "off"),
+      text: (inv.status || "active").toUpperCase()
+    });
+    head.appendChild(title);
+    head.appendChild(statusPill);
+    card.appendChild(head);
+
+    var statsRow = el("div", {style: "display:flex;gap:16px;background:#1e293b;padding:10px;border-radius:6px;font-size:12px"}, [
+      el("div", null, [
+        el("div", {style: "color:#94a3b8;font-size:10px", text: "ARTIFACTS"}),
+        el("div", {style: "font-weight:700;font-size:14px;color:#f8fafc", text: String(number(inv.artifacts_count))})
+      ]),
+      el("div", null, [
+        el("div", {style: "color:#94a3b8;font-size:10px", text: "FINDINGS"}),
+        el("div", {style: "font-weight:700;font-size:14px;color:#f87171", text: String(number(inv.findings_count))})
+      ]),
+      el("div", null, [
+        el("div", {style: "color:#94a3b8;font-size:10px", text: "TIMELINE"}),
+        el("div", {style: "font-weight:700;font-size:14px;color:#a78bfa", text: String(number(inv.timeline_count))})
+      ])
+    ]);
+    card.appendChild(statsRow);
+
+    if (inv.chain_head) {
+      var chainDiv = el("div", {
+        style: "font-size:11px;color:#94a3b8;font-family:monospace;word-break:break-all;background:#090d16;padding:8px;border-radius:4px;border:1px solid #1e293b",
+        text: "CHAIN HEAD: " + String(inv.chain_head).substring(0, 32) + "..."
+      });
+      card.appendChild(chainDiv);
+    }
+
+    var actions = el("div", {style: "display:flex;justify-content:space-between;align-items:center;margin-top:auto;padding-top:8px"});
+    var meta = el("span", {style: "font-size:11px;color:#64748b", text: inv.updated_at ? "Updated " + String(inv.updated_at).substring(0, 19) : ""});
+    var btn = el("button", {type: "button", class: "link", style: "color:#38bdf8;font-weight:600;font-size:12px", text: "View Forensic Report ↗"});
+    btn.addEventListener("click", function() {
+      window.open("/v1/investigations/report?case=" + encodeURIComponent(inv.case_id), "_blank");
+    });
+    actions.appendChild(meta);
+    actions.appendChild(btn);
+    card.appendChild(actions);
+
+    grid.appendChild(card);
+  });
+  container.appendChild(grid);
+}
+
+async function refreshInvestigations() {
+  try {
+    var data = await api("/v1/investigations");
+    renderInvestigations(data);
+  } catch (err) {
+    var container = byId("investigations-list");
+    if (container) {
+      container.replaceChildren(el("div", {
+        style: "color:var(--muted);font-size:13px;padding:8px 0",
+        text: "Could not load investigations (server offline or requires authentication)."
+      }));
+    }
+  }
+}
+
 /* ------------------------------------------------------------ findings table */
 function severityClass(value) {
   var name = String(value === null || value === undefined ? "" : value).toLowerCase();
@@ -739,6 +835,7 @@ async function refresh() {
     renderStatus(status);
     var findings = await api(findingsPath());
     renderFindings(findings);
+    await refreshInvestigations();
     setConnection(true);
     if (state.timer === null) {
       restartTimer();
@@ -785,6 +882,7 @@ async function connect() {
     renderStatus(status);
     var findings = await api(findingsPath());
     renderFindings(findings);
+    await refreshInvestigations();
     storage.set("token", state.token);
     storage.set("limit", state.limit);
     setConnection(true);

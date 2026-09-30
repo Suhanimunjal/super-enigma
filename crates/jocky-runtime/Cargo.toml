@@ -1,0 +1,20 @@
+[package]
+name = "jocky-runtime"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+description = "Core execution engine orchestrating forensic collection, evidence, detection, timeline, and reporting"
+
+[dependencies]
+serde = { workspace = true }
+serde_json = { workspace = true }
+thiserror = { workspace = true }
+chrono = { workspace = true }
+jocky-ast = { path = "../jocky-ast" }
+jocky-ir = { path = "../jocky-ir" }
+jocky-forensics = { path = "../jocky-forensics" }
+jocky-evidence = { path = "../jocky-evidence" }
+jocky-detection = { path = "../jocky-detection" }
+jocky-timeline = { path = "../jocky-timeline" }
+jocky-report = { path = "../jocky-report" }

@@ -26,8 +26,11 @@ if str(REPO) not in sys.path:
 
 from jocky.errors import JockySyntaxError  # noqa: E402
 from jocky.runner import compile_source  # noqa: E402
-from tests import fuzz_language  # noqa: E402
-from tests.fuzz_language import (  # noqa: E402
+_TESTS_DIR = str(pathlib.Path(__file__).resolve().parent)
+if _TESTS_DIR not in sys.path:
+    sys.path.insert(0, _TESTS_DIR)
+import fuzz_language  # noqa: E402
+from fuzz_language import (  # noqa: E402
     DEFECT_NAMES,
     HISTORICAL_REPRODUCERS,
     defect_sources,

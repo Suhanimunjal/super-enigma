@@ -1,0 +1,10 @@
+[package]
+name = "jocky-ast"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+description = "AST definitions for JOCKY forensic language"
+
+[dependencies]
+serde = { workspace = true }

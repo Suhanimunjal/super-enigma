@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JOCKY Digital Forensic Report - INC-2026-001</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background: #0f172a; color: #f8fafc; margin: 0; padding: 40px; }
+        .container { max-width: 1100px; margin: 0 auto; background: #1e293b; border-radius: 12px; padding: 40px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        h1, h2, h3 { color: #38bdf8; }
+        .header { border-bottom: 2px solid #334155; padding-bottom: 20px; margin-bottom: 30px; display: flex; justify-content: space-between; align-items: flex-end; }
+        .badge-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-bottom: 30px; }
+        .badge-card { background: #0f172a; padding: 20px; border-radius: 8px; border: 1px solid #334155; text-align: center; }
+        .badge-val { font-size: 28px; font-weight: bold; margin-top: 5px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 15px; margin-bottom: 30px; }
+        th, td { padding: 12px 14px; text-align: left; border-bottom: 1px solid #334155; font-size: 14px; }
+        th { background: #0f172a; color: #94a3b8; text-transform: uppercase; font-size: 11px; letter-spacing: 0.05em; }
+        .custody { background: #0b1329; border-left: 4px solid #38bdf8; padding: 15px 20px; border-radius: 4px; margin-top: 20px; }
+        code { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; color: #38bdf8; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <div>
+            <h1>JOCKY Forensic Investigation Report</h1>
+            <p style="color:#94a3b8; margin:0;">Case Reference: <strong>INC-2026-001</strong> &bull; Generated: 2026-09-29T19:08:55.431489+00:00</p>
+        </div>
+        <div style="text-align:right;">
+            <p style="margin:0; color:#94a3b8;">Investigator</p>
+            <h3 style="margin:0; color:#f8fafc;">Lead Incident Responder</h3>
+        </div>
+    </div>
+
+    <h2>1. Executive Summary</h2>
+    <div class="badge-grid">
+        <div class="badge-card"><div style="color:#94a3b8; font-size:12px;">SYSTEMS ANALYZED</div><div class="badge-val" style="color:#38bdf8;">1</div></div>
+        <div class="badge-card"><div style="color:#94a3b8; font-size:12px;">EVIDENCE COLLECTED</div><div class="badge-val" style="color:#10b981;">9</div></div>
+        <div class="badge-card"><div style="color:#94a3b8; font-size:12px;">CRITICAL / HIGH</div><div class="badge-val" style="color:#ef4444;">0</div></div>
+        <div class="badge-card"><div style="color:#94a3b8; font-size:12px;">INTEGRITY STATUS</div><div class="badge-val" style="color:#10b981;">VERIFIED &check;</div></div>
+    </div>
+
+    <h2>2. Suspicious Findings &amp; Detections (69)</h2>
+    <table>
+        <thead>
+            <tr><th>Finding ID</th><th>Severity</th><th>Host</th><th>Title &amp; Context</th><th>Recommended Action</th></tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>FIND-0001</strong></td>
+                <td><span style="background:#3b82f6;color:#fff;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:bold;">LOW</span></td>
+                <td>paws</td>
+                <td><strong>PATH entry C:/Users/suhan/.gemini/antigravity-ide/bin is writable (C:\Users\suhan\.gemini\antigravity-ide\bin)</strong><br><small style="color:#94a3b8;">hijackable_path</small></td>
+                <td><small style="color:#0f766e;">remove the directory from PATH or fix its permissions</small></td>
+            </tr><tr>
+                <td><strong>FIND-0002</strong></td>
+                <td><span style="background:#3b82f6;color:#fff;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:bold;">LOW</span></td>
+                <td>paws</td>
+                <td><strong>PATH entry C:\Program Files\Common Files\Oracle\Java\javapath is writable (C:\Program Files\Common Files\Oracle\Java\javapath_target_4389203)</strong><br><small style="color:#94a3b8;">hijackable_path</small></td>
+                <td><small style="color:#0f766e;">remove the directory from PATH or fix its permissions</small></td>
+            </tr><tr>
+                <td><strong>FIND-0003</strong></td>
+                <td><span style="background:#3b82f6;color:#fff;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:bold;">LOW</span></td>
+                <td>paws</td>
+                <td><strong>PATH entry C:\Program Files (x86)\Common Files\Oracle\Java\javapath is writable (C:\Program Files (x86)\Common Files\Oracle\Java\javapath_target_4420984)</strong><br><small style="color:#94a3b8;">hijackable_path</small></td>
+                <td><small style="color:#0f766e;">remove the directory from PATH or fix its permissions</small></td>
+            </tr><tr>
+                <td><strong>FIND-0004</strong></td>
+                <td><span style="background:#3b82f6;color:#fff;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:bold;">LOW</span></td>
+                <td>paws</td>
+                <td><strong>PATH entry C:\Windows\system32 is writable (C:\Windows\System32)</strong><br><small style="color:#94a3b8;">hijackable_path</small></td>
+                <td><small style="color:#0f766e;">remove the directory from PATH or fix its permissions</small></td>
+            </tr><tr>
+                <td><strong>FIND-0005</strong></td>
+                <td><span style="background:#3b82f6;color:#fff;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:bold;">LOW</span></td>
+                <td>paws</td>
+                <td><strong>PATH entry C:\Windows is writable (C:\Windows)</strong><br><small style="color:#94a3b8;">hijackable_path</small></td>
+                <td><small style="color:#0f766e;">remove the directory from PATH or fix its permissions</small></td>
+            </tr><tr>
+                <td><strong>FIND-0006</strong></td>
+                <td><span style="background:#3b82f6;color:#fff;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:bold;">LOW</span></td>
+                <td>paws</td>
+                <td><strong>PATH entry C:\Windows\System32\Wbem is writable (C:\Windows\System32\wbem)</strong><br><small style="color:#94a3b8;">hijackable_path</small></td>
+                <td><small style="color:#0f766e;">remove the directory from PATH or fix its permissions</small></td>
+            </tr><tr>
+                <td><strong>FIND-0007</strong></td>
+                <td><span style="background:#3b82f6;color:#fff;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:bold;">LOW</span></td>
+                <td>paws</td>
+                <td><strong>PATH entry C:\Windows\System32\WindowsPowerShell\v1.0\ is writable (C:\Windows\System32\WindowsPowerShell\v1.0)</strong><br><small style="color:#94a3b8;">hijackable_path</small></td>
+                <td><small style="color:#0f766e;">remove the directory from PATH or fix its permissions</small></td>
+            </tr><tr>
+                <td><strong>FIND-0008</strong></td>
+                <td><span style="background:#3b82f6;color:#fff;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:bold;">LOW</span></td>
+                <td>paws</td>
+                <td><strong>PATH entry C:\Windows\System32\OpenSSH\ is writable (C:\Windows\System32\OpenSSH)</strong><br><small style="color:#94a3b8;">hijackable_path</small></td>
+                <td><small style="color:#0f766e;">remove the directory from PATH or fix its permissions</small></td>
+            </tr><tr>
+                <td><strong>FIND-0009</strong></td>
+                <td><span style="background:#3b82f6;color:#fff;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:bold;">LOW</span></td>
+                <td>paws</td>
+                <td><strong>PATH entry C:\Program Files\Git\cmd is writable (C:\Program Files\Git\cmd)</strong><br><small style="color:#94a3b8;">hijackable_path</small></td>
+                <td><small style="color:#0f766e;">remove the directory from PATH or fix its permissions</small></td>
+            </tr><tr>
+                <td><strong>FIND-0010</strong></td>
+                <td><span style="background:#3b82f6;color:#fff;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:bold;">LOW</span></td>
+                <td>paws</td>
+                <td><strong>PATH entry C:\Program Files\nodejs\ is writable (C:\Program Files\nodejs)</strong><br><small style="color:#94a3b8;">hijackable_path</small></td>
+                <td><small style="color:#0f766e;">remove the directory from PATH or fix its permissions</small></td>
+            </tr><tr>
+                <td><strong>FIND-0011</strong></td>
+                <td><span style="background:#3b82f6;color:#fff;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:bold;">LOW</span></td>
+                <td>paws</td>
+                <td><strong>PATH entry C:\ProgramData\chocolatey\bin is writable (C:\ProgramData\chocolatey\bin)</strong><br><small style="color:#94a3b8;">hijackable_path</small></td>
+                <td><small style="color:#0f766e;">remove the directory from PATH or fix its permissions</small></td>
+            </tr><tr>
+                <td><strong>FIND-0012</strong></td>
+                <td><span style="background:#3b82f6;color:#fff;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:bold;">LOW</span></td>
+                <td>paws</td>
+                <td><strong>PATH entry C:\Program Files\Cloudflare\Cloudflare WARP\ is writable (C:\Program Files\Cloudflare\Cloudflare WARP)</strong><br><small style="color:#94a3b8;">hijackable_path</small></td>
+                <td><small style="color:#0f766e;">remove the directory from PATH or fix its permissions</small></td>
+            </tr><tr>
+                <td><strong>FIND-0013</strong></td>
+                <td><span style="background:#3b82f6;color:#fff;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:bold;">LOW</span></td>
+                <td>paws</td>
+                <td><strong>PATH entry C:\Program Files\dotnet\ is writable (C:\Program Files\dotnet)</strong><br><small style="color:#94a3b8;">hijackable_path</small></td>
+                <td><small style="color:#0f766e;">remove the directory from PATH or fix its permissions</small></td>
+            </tr><tr>
+                <td><strong>FIND-0014</strong></td>
+                <td><span style="background:#3b82f6;color:#fff;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:bold;">LOW</span></td>
+                <td>paws</td>
+                <td><strong>PATH entry C:\Users\suhan\AppData\Local\Microsoft\WindowsApps is writable (C:\Users\suhan\AppData\Local\Microsoft\WindowsApps)</strong><br><small style="color:#94a3b8;">hijackable_path</small></td>
+                <td><small style="color:#0f766e;">remove the directory from PATH or fix its permissions</small></td>
+            </tr><tr>
+                <td><strong>FIND-0015</strong></td>
+                <td><span style="background:#3b82f6;color:#fff;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:bold;">LOW</span></td>
+                <td>paws</td>
+                <td><strong>PATH entry C:\Users\suhan\AppData\Local\Python\bin is writable (C:\Users\suhan\AppData\Local\Python\bin)</strong><br><small style="color:#94a3b8;">hijackable_path</small></td>
+                <td><small style="color:#0f766e;">remove the directory from PATH or fix its permissions</small></td>
+            </tr><tr>
+                <td><strong>FIND-0016</strong></td>
+                <td><span style="background:#3b82f6;color:#fff;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:bold;">LOW</span></td>
+                <td>paws</td>
+                <td><strong>PATH entry C:\Users\suhan\AppData\Local\Programs\Microsoft VS Code\bin is writable (C:\Users\suhan\AppData\Local\Programs\Microsoft VS Code\bin)</strong><br><small style="color:#94a3b8;">hijackable_path</small></td>
+                <td><small style="color:#0f766e;">remove the directory from PATH or fix its permissions</small></td>
+            </tr><tr>
+                <td><strong>FIND-0017</strong></td>
+                <td><span style="background:#3b82f6;color:#fff;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:bold;">LOW</span></td>
+                <td>paws</td>
+                <td><strong>PATH entry C:\Users\suhan\AppData\Local\Programs\Antigravity IDE\bin is writable (C:\Users\suhan\AppData\Local\Programs\Antigravity IDE\bin)</strong><br><small style="color:#94a3b8;">hijackable_path</small></td>
+                <td><small style="color:#0f766e;">remove the directory from PATH or fix its permissions</small></td>
+            </tr><tr>
+                <td><strong>FIND-0018</strong></td>
+                <td><span style="background:#3b82f6;color:#fff;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:bold;">LOW</span></td>
+                <td>paws</td>
+                <td><strong>PATH entry D:\sqlite is writable (D:\sqlite)</strong><br><small style="color:#94a3b8;">hijackable_path</small></td>
+                <td><small style="color:#0f766e;">remove the directory from PATH or fix its permissions</small></td>
+            </tr><tr>
+                <td><strong>FIND-0019</strong></td>
+                <td><span style="background:#3b82f6;color:#fff;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:bold;">LOW</span></td>
+                <td>paws</td>
+                <td><strong>PATH entry D:\CDR is writable (D:\CDR)</strong><br><small style="color:#94a3b8;">hijackable_path</small></td>
+                <td><small style="color:#0f766e;">remove the directory from PATH or fix its permissions</small></td>
+            </tr><tr>
+                <td><strong>FIND-0020</strong></td>
+                <td><span style="background:#3b82f6;color:#fff;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:bold;">INFO</span></td>
+                <td>paws</td>
+                <td><strong>driver dump_dumpstorport.sys is resident but its image file is not on disk (crash-dump stack driver: expected)</strong><br><small style="color:#94a3b8;">byovd_deleted_driver_file</small></td>
+                <td><small style="color:#0f766e;">no action: Windows loads dump_*.sys into the crash-dump stack at boot, so the image is resident while absent from the filesystem</small></td>
+            </tr><tr>
+                <td><strong>FIND-0021</strong></td>
+                <td><span style="background:#3b82f6;color:#fff;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:bold;">INFO</span></td>
+                <td>paws</td>
+                <td><strong>driver dump_stornvme.sys is resident but its image file is not on disk (crash-dump stack driver: expected)</strong><br><small style="color:#94a3b8;">byovd_deleted_driver_file</small></td>
+                <td><small style="color:#0f766e;">no action: Windows loads dump_*.sys into the crash-dump stack at boot, so the image is resident while absent from the filesystem</small></td>
+            </tr><tr>
+                <td><strong>FIND-0022</strong></td>
+                <td><span style="background:#3b82f6;color:#fff;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:bold;">INFO</span></td>
+                <td>paws</td>
+                <td><strong>driver dump_dumpfve.sys is resident but its image file is not on disk (crash-dump stack driver: expected)</strong><br><small style="color:#94a3b8;">byovd_deleted_driver_file</small></td>
+                <td><small style="color:#0f766e;">no action: Windows loads dump_*.sys into the crash-dump stack at boot, so the image is resident while absent from the filesystem</small></td>
+            </tr><tr>
+                <td><strong>FIND-0023</strong></td>
+                <td><span style="background:#3b82f6;color:#fff;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:bold;">INFO</span></td>
+                <td>paws</td>
+                <td><strong>per-module taint and module load-time checks do not apply on this platform</strong><br><small style="color:#94a3b8;">partial_visibility</small></td>
+                <td><small style="color:#0f766e;">do not read the absence of those findings as a clean result; correlate driver provenance against the platform's own mechanisms (WDAC or the vulnerable-driver blocklist) instead</small></td>
+            </tr><tr>
+                <td><strong>FIND-0024</strong></td>
+                <td><span style="background:#3b82f6;color:#fff;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:bold;">LOW</span></td>
+                <td>paws</td>
+                <td><strong>PATH entry C:/Users/suhan/.gemini/antigravity-ide/bin is writable (C:\Users\suhan\.gemini\antigravity-ide\bin)</strong><br><small style="color:#94a3b8;">hijackable_path</small></td>
+                <td><small style="color:#0f766e;">remove the directory from PATH or fix its permissions</small></td>
+            </tr><tr>
+                <td><strong>FIND-0025</strong></td>
+                <td><span style="background:#3b82f6;color:#fff;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:bold;">LOW</span></td>
+                <td>paws</td>
+                <td><strong>PATH entry C:\Program Files\Common Files\Oracle\Java\javapath is writable (C:\Program Files\Common Files\Oracle\Java\javapath_target_4389203)</strong><br><small style="color:#94a3b8;">hijackable_path</small></td>
+                <td><small style="color:#0f766e;">remove the directory from PATH or fix its permissions</small></td>
+            </tr><tr>
+                <td><strong>FIND-0026</strong></td>
+                <td><span style="background:#3b82f6;color:#fff;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:bold;">LOW</span></td>
+                <td>paws</td>
+                <td><strong>PATH entry C:\Program Files (x86)\Common Files\Oracle\Java\javapath is writable (C:\Program Files (x86)\Common Files\Oracle\Java\javapath_target_4420984)</strong><br><small style="color:#94a3b8;">hijackable_path</small></td>
+                <td><small style="color:#0f766e;">remove the directory from PATH or fix its permissions</small></td>
+            </tr><tr>
+                <td><strong>FIND-0027</strong></td>
+                <td><span style="background:#3b82f6;color:#fff;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:bold;">LOW</span></td>
+                <td>paws</td>
+                <td><strong>PATH entry C:\Windows\system32 is writable (C:\Windows\System32)</strong><br><small style="color:#94a3b8;">hijackable_path</small></td>
+                <td><small style="color:#0f766e;">remove the directory from PATH or fix its permissions</small></td>
+            </tr><tr>
+                <td><strong>FIND-0028</strong></td>
+                <td><span style="background:#3b82f6;color:#fff;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:bold;">LOW</span></td>
+                <td>paws</td>
+                <td><strong>PATH entry C:\Windows is writable (C:\Windows)</strong><br><small style="color:#94a3b8;">hijackable_path</small></td>
+                <td><small style="color:#0f766e;">remove the directory from PATH or fix its permissions</small></td>
+            </tr><tr>
+                <td><strong>FIND-0029</strong></td>
+                <td><span style="background:#3b82f6;color:#fff;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:bold;">LOW</span></td>
+                <td>paws</td>
+                <td><strong>PATH entry C:\Windows\System32\Wbem is writable (C:\Windows\System32\wbem)</strong><br><small style="color:#94a3b8;">hijackable_path</small></td>
+                <td><small style="color:#0f766e;">remove the directory from PATH or fix its permissions</small></td>
+            </tr><tr>
+                <td><strong>FIND-0030</strong></td>
+                <td><span style="background:#3b82f6;color:#fff;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:bold;">LOW</span></td>
+                <td>paws</td>
+                <td><strong>PATH entry C:\Windows\System32\WindowsPowerShell\v1.0\ is writable (C:\Windows\System32\WindowsPowerShell\v1.0)</strong><br><small style="color:#94a3b8;">hijackable_path</small></td>
+                <td><small style="color:#0f766e;">remove the directory from PATH or fix its permissions</small></td>
+            </tr><tr>
+                <td><strong>FIND-0031</strong></td>
+                <td><span style="background:#3b82f6;color:#fff;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:bold;">LOW</span></td>
+                <td>paws</td>
+                <td><strong>PATH entry C:\Windows\System32\OpenSSH\ is writable (C:\Windows\System32\OpenSSH)</strong><br><small style="color:#94a3b8;">hijackable_path</small></td>
+                <td><small style="color:#0f766e;">remove the directory from PATH or fix its permissions</small></td>
+            </tr><tr>
+                <td><strong>FIND-0032</strong></td>
+                <td><span style="background:#3b82f6;color:#fff;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:bold;">LOW</span></td>
+                <td>paws</td>
+                <td><strong>PATH entry C:\Program Files\Git\cmd is writable (C:\Program Files\Git\cmd)</strong><br><small style="color:#94a3b8;">hijackable_path</small></td>
+                <td><small style="color:#0f766e;">remove the directory from PATH or fix its permissions</small></td>
+            </tr><tr>
+                <td><strong>FIND-0033</strong></td>
+                <td><span style="background:#3b82f6;color:#fff;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:bold;">LOW</span></td>
+                <td>paws</td>
+                <td><strong>PATH entry C:\Program Files\nodejs\ is writable (C:\Program Files\nodejs)</strong><br><small style="color:#94a3b8;">hijackable_path</small></td>
+                <td><small style="color:#0f766e;">remove the directory from PATH or fix its permissions</small></td>
+            </tr><tr>
+                <td><strong>FIND-0034</strong></td>
+                <td><span style="background:#3b82f6;color:#fff;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:bold;">LOW</span></td>
+                <td>paws</td>
+                <td><strong>PATH entry C:\ProgramData\chocolatey\bin is writable (C:\ProgramData\chocolatey\bin)</strong><br><small style="color:#94a3b8;">hijackable_path</small></td>
+                <td><small style="color:#0f766e;">remove the directory from PATH or fix its permissions</small></td>
+            </tr><tr>
+                <td><strong>FIND-0035</strong></td>
+                <td><span style="background:#3b82f6;color:#fff;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:bold;">LOW</span></td>
+                <td>paws</td>
+                <td><strong>PATH entry C:\Program Files\Cloudflare\Cloudflare WARP\ is writable (C:\Program Files\Cloudflare\Cloudflare WARP)</strong><br><small style="color:#94a3b8;">hijackable_path</small></td>
+                <td><small style="color:#0f766e;">remove the directory from PATH or fix its permissions</small></td>
+            </tr><tr>
+                <td><strong>FIND-0036</strong></td>
+                <td><span style="background:#3b82f6;color:#fff;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:bold;">LOW</span></td>
+                <td>paws</td>
+                <td><strong>PATH entry C:\Program Files\dotnet\ is writable (C:\Program Files\dotnet)</strong><br><small style="color:#94a3b8;">hijackable_path</small></td>
+                <td><small style="color:#0f766e;">remove the directory from PATH or fix its permissions</small></td>
+            </tr><tr>
+                <td><strong>FIND-0037</strong></td>
+                <td><span style="background:#3b82f6;color:#fff;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:bold;">LOW</span></td>
+                <td>paws</td>
+                <td><strong>PATH entry C:\Users\suhan\AppData\Local\Microsoft\WindowsApps is writable (C:\Users\suhan\AppData\Local\Microsoft\WindowsApps)</strong><br><small style="color:#94a3b8;">hijackable_path</small></td>
+                <td><small style="color:#0f766e;">remove the directory from PATH or fix its permissions</small></td>
+            </tr><tr>
+                <td><strong>FIND-0038</strong></td>
+                <td><span style="background:#3b82f6;color:#fff;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:bold;">LOW</span></td>
+                <td>paws</td>
+                <td><strong>PATH entry C:\Users\suhan\AppData\Local\Python\bin is writable (C:\Users\suhan\AppData\Local\Python\bin)</strong><br><small style="color:#94a3b8;">hijackable_path</small></td>
+                <td><small style="color:#0f766e;">remove the directory from PATH or fix its permissions</small></td>
+            </tr><tr>
+                <td><strong>FIND-0039</strong></td>
+                <td><span style="background:#3b82f6;color:#fff;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:bold;">LOW</span></td>
+                <td>paws</td>
+                <td><strong>PATH entry C:\Users\suhan\AppData\Local\Programs\Microsoft VS Code\bin is writable (C:\Users\suhan\AppData\Local\Programs\Microsoft VS Code\bin)</strong><br><small style="color:#94a3b8;">hijackable_path</small></td>
+                <td><small style="color:#0f766e;">remove the directory from PATH or fix its permissions</small></td>
+            </tr><tr>
+                <td><strong>FIND-0040</strong></td>
+                <td><span style="background:#3b82f6;color:#fff;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:bold;">LOW</span></td>
+                <td>paws</td>
+                <td><strong>PATH entry C:\Users\suhan\AppData\Local\Programs\Antigravity IDE\bin is writable (C:\Users\suhan\AppData\Local\Programs\Antigravity IDE\bin)</strong><br><small style="color:#94a3b8;">hijackable_path</small></td>
+                <td><small style="color:#0f766e;">remove the directory from PATH or fix its permissions</small></td>
+            </tr><tr>
+                <td><strong>FIND-0041</strong></td>
+                <td><span style="background:#3b82f6;color:#fff;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:bold;">LOW</span></td>
+                <td>paws</td>
+                <td><strong>PATH entry D:\sqlite is writable (D:\sqlite)</strong><br><small style="color:#94a3b8;">hijackable_path</small></td>
+                <td><small style="color:#0f766e;">remove the directory from PATH or fix its permissions</small></td>
+            </tr><tr>
+                <td><strong>FIND-0042</strong></td>
+                <td><span style="background:#3b82f6;color:#fff;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:bold;">LOW</span></td>
+                <td>paws</td>
+                <td><strong>PATH entry D:\CDR is writable (D:\CDR)</strong><br><small style="color:#94a3b8;">hijackable_path</small></td>
+                <td><small style="color:#0f766e;">remove the directory from PATH or fix its permissions</small></td>
+            </tr><tr>
+                <td><strong>FIND-0043</strong></td>
+                <td><span style="background:#3b82f6;color:#fff;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:bold;">INFO</span></td>
+                <td>paws</td>
+                <td><strong>driver dump_dumpstorport.sys is resident but its image file is not on disk (crash-dump stack driver: expected)</strong><br><small style="color:#94a3b8;">byovd_deleted_driver_file</small></td>
+                <td><small style="color:#0f766e;">no action: Windows loads dump_*.sys into the crash-dump stack at boot, so the image is resident while absent from the filesystem</small></td>
+            </tr><tr>
+                <td><strong>FIND-0044</strong></td>
+                <td><span style="background:#3b82f6;color:#fff;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:bold;">INFO</span></td>
+                <td>paws</td>
+                <td><strong>driver dump_stornvme.sys is resident but its image file is not on disk (crash-dump stack driver: expected)</strong><br><small style="color:#94a3b8;">byovd_deleted_driver_file</small></td>
+                <td><small style="color:#0f766e;">no action: Windows loads dump_*.sys into the crash-dump stack at boot, so the image is resident while absent from the filesystem</small></td>
+            </tr><tr>
+                <td><strong>FIND-0045</strong></td>
+                <td><span style="background:#3b82f6;color:#fff;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:bold;">INFO</span></td>
+                <td>paws</td>
+                <td><strong>driver dump_dumpfve.sys is resident but its image file is not on disk (crash-dump stack driver: expected)</strong><br><small style="color:#94a3b8;">byovd_deleted_driver_file</small></td>
+                <td><small style="color:#0f766e;">no action: Windows loads dump_*.sys into the crash-dump stack at boot, so the image is resident while absent from the filesystem</small></td>
+            </tr><tr>
+                <td><strong>FIND-0046</strong></td>
+                <td><span style="background:#3b82f6;color:#fff;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:bold;">INFO</span></td>
+                <td>paws</td>
+                <td><strong>per-module taint and module load-time checks do not apply on this platform</strong><br><small style="color:#94a3b8;">partial_visibility</small></td>
+                <td><small style="color:#0f766e;">do not read the absence of those findings as a clean result; correlate driver provenance against the platform's own mechanisms (WDAC or the vulnerable-driver blocklist) instead</small></td>
+            </tr><tr>
+                <td><strong>FIND-0047</strong></td>
+                <td><span style="background:#3b82f6;color:#fff;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:bold;">LOW</span></td>
+                <td>paws</td>
+                <td><strong>PATH entry C:/Users/suhan/.gemini/antigravity-ide/bin is writable (C:\Users\suhan\.gemini\antigravity-ide\bin)</strong><br><small style="color:#94a3b8;">hijackable_path</small></td>
+                <td><small style="color:#0f766e;">remove the directory from PATH or fix its permissions</small></td>
+            </tr><tr>
+                <td><strong>FIND-0048</strong></td>
+                <td><span style="background:#3b82f6;color:#fff;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:bold;">LOW</span></td>
+                <td>paws</td>
+                <td><strong>PATH entry C:\Program Files\Common Files\Oracle\Java\javapath is writable (C:\Program Files\Common Files\Oracle\Java\javapath_target_4389203)</strong><br><small style="color:#94a3b8;">hijackable_path</small></td>
+                <td><small style="color:#0f766e;">remove the directory from PATH or fix its permissions</small></td>
+            </tr><tr>
+                <td><strong>FIND-0049</strong></td>
+                <td><span style="background:#3b82f6;color:#fff;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:bold;">LOW</span></td>
+                <td>paws</td>
+                <td><strong>PATH entry C:\Program Files (x86)\Common Files\Oracle\Java\javapath is writable (C:\Program Files (x86)\Common Files\Oracle\Java\javapath_target_4420984)</strong><br><small style="color:#94a3b8;">hijackable_path</small></td>
+                <td><small style="color:#0f766e;">remove the directory from PATH or fix its permissions</small></td>
+            </tr><tr>
+                <td><strong>FIND-0050</strong></td>
+                <td><span style="background:#3b82f6;color:#fff;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:bold;">LOW</span></td>
+                <td>paws</td>
+                <td><strong>PATH entry C:\Windows\system32 is writable (C:\Windows\System32)</strong><br><small style="color:#94a3b8;">hijackable_path</small></td>
+                <td><small style="color:#0f766e;">remove the directory from PATH or fix its permissions</small></td>
+            </tr><tr>
+                <td><strong>FIND-0051</strong></td>
+                <td><span style="background:#3b82f6;color:#fff;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:bold;">LOW</span></td>
+                <td>paws</td>
+                <td><strong>PATH entry C:\Windows is writable (C:\Windows)</strong><br><small style="color:#94a3b8;">hijackable_path</small></td>
+                <td><small style="color:#0f766e;">remove the directory from PATH or fix its permissions</small></td>
+            </tr><tr>
+                <td><strong>FIND-0052</strong></td>
+                <td><span style="background:#3b82f6;color:#fff;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:bold;">LOW</span></td>
+                <td>paws</td>
+                <td><strong>PATH entry C:\Windows\System32\Wbem is writable (C:\Windows\System32\wbem)</strong><br><small style="color:#94a3b8;">hijackable_path</small></td>
+                <td><small style="color:#0f766e;">remove the directory from PATH or fix its permissions</small></td>
+            </tr><tr>
+                <td><strong>FIND-0053</strong></td>
+                <td><span style="background:#3b82f6;color:#fff;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:bold;">LOW</span></td>
+                <td>paws</td>
+                <td><strong>PATH entry C:\Windows\System32\WindowsPowerShell\v1.0\ is writable (C:\Windows\System32\WindowsPowerShell\v1.0)</strong><br><small style="color:#94a3b8;">hijackable_path</small></td>
+                <td><small style="color:#0f766e;">remove the directory from PATH or fix its permissions</small></td>
+            </tr><tr>
+                <td><strong>FIND-0054</strong></td>
+                <td><span style="background:#3b82f6;color:#fff;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:bold;">LOW</span></td>
+                <td>paws</td>
+                <td><strong>PATH entry C:\Windows\System32\OpenSSH\ is writable (C:\Windows\System32\OpenSSH)</strong><br><small style="color:#94a3b8;">hijackable_path</small></td>
+                <td><small style="color:#0f766e;">remove the directory from PATH or fix its permissions</small></td>
+            </tr><tr>
+                <td><strong>FIND-0055</strong></td>
+                <td><span style="background:#3b82f6;color:#fff;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:bold;">LOW</span></td>
+                <td>paws</td>
+                <td><strong>PATH entry C:\Program Files\Git\cmd is writable (C:\Program Files\Git\cmd)</strong><br><small style="color:#94a3b8;">hijackable_path</small></td>
+                <td><small style="color:#0f766e;">remove the directory from PATH or fix its permissions</small></td>
+            </tr><tr>
+                <td><strong>FIND-0056</strong></td>
+                <td><span style="background:#3b82f6;color:#fff;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:bold;">LOW</span></td>
+                <td>paws</td>
+                <td><strong>PATH entry C:\Program Files\nodejs\ is writable (C:\Program Files\nodejs)</strong><br><small style="color:#94a3b8;">hijackable_path</small></td>
+                <td><small style="color:#0f766e;">remove the directory from PATH or fix its permissions</small></td>
+            </tr><tr>
+                <td><strong>FIND-0057</strong></td>
+                <td><span style="background:#3b82f6;color:#fff;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:bold;">LOW</span></td>
+                <td>paws</td>
+                <td><strong>PATH entry C:\ProgramData\chocolatey\bin is writable (C:\ProgramData\chocolatey\bin)</strong><br><small style="color:#94a3b8;">hijackable_path</small></td>
+                <td><small style="color:#0f766e;">remove the directory from PATH or fix its permissions</small></td>
+            </tr><tr>
+                <td><strong>FIND-0058</strong></td>
+                <td><span style="background:#3b82f6;color:#fff;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:bold;">LOW</span></td>
+                <td>paws</td>
+                <td><strong>PATH entry C:\Program Files\Cloudflare\Cloudflare WARP\ is writable (C:\Program Files\Cloudflare\Cloudflare WARP)</strong><br><small style="color:#94a3b8;">hijackable_path</small></td>
+                <td><small style="color:#0f766e;">remove the directory from PATH or fix its permissions</small></td>
+            </tr><tr>
+                <td><strong>FIND-0059</strong></td>
+                <td><span style="background:#3b82f6;color:#fff;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:bold;">LOW</span></td>
+                <td>paws</td>
+                <td><strong>PATH entry C:\Program Files\dotnet\ is writable (C:\Program Files\dotnet)</strong><br><small style="color:#94a3b8;">hijackable_path</small></td>
+                <td><small style="color:#0f766e;">remove the directory from PATH or fix its permissions</small></td>
+            </tr><tr>
+                <td><strong>FIND-0060</strong></td>
+                <td><span style="background:#3b82f6;color:#fff;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:bold;">LOW</span></td>
+                <td>paws</td>
+                <td><strong>PATH entry C:\Users\suhan\AppData\Local\Microsoft\WindowsApps is writable (C:\Users\suhan\AppData\Local\Microsoft\WindowsApps)</strong><br><small style="color:#94a3b8;">hijackable_path</small></td>
+                <td><small style="color:#0f766e;">remove the directory from PATH or fix its permissions</small></td>
+            </tr><tr>
+                <td><strong>FIND-0061</strong></td>
+                <td><span style="background:#3b82f6;color:#fff;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:bold;">LOW</span></td>
+                <td>paws</td>
+                <td><strong>PATH entry C:\Users\suhan\AppData\Local\Python\bin is writable (C:\Users\suhan\AppData\Local\Python\bin)</strong><br><small style="color:#94a3b8;">hijackable_path</small></td>
+                <td><small style="color:#0f766e;">remove the directory from PATH or fix its permissions</small></td>
+            </tr><tr>
+                <td><strong>FIND-0062</strong></td>
+                <td><span style="background:#3b82f6;color:#fff;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:bold;">LOW</span></td>
+                <td>paws</td>
+                <td><strong>PATH entry C:\Users\suhan\AppData\Local\Programs\Microsoft VS Code\bin is writable (C:\Users\suhan\AppData\Local\Programs\Microsoft VS Code\bin)</strong><br><small style="color:#94a3b8;">hijackable_path</small></td>
+                <td><small style="color:#0f766e;">remove the directory from PATH or fix its permissions</small></td>
+            </tr><tr>
+                <td><strong>FIND-0063</strong></td>
+                <td><span style="background:#3b82f6;color:#fff;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:bold;">LOW</span></td>
+                <td>paws</td>
+                <td><strong>PATH entry C:\Users\suhan\AppData\Local\Programs\Antigravity IDE\bin is writable (C:\Users\suhan\AppData\Local\Programs\Antigravity IDE\bin)</strong><br><small style="color:#94a3b8;">hijackable_path</small></td>
+                <td><small style="color:#0f766e;">remove the directory from PATH or fix its permissions</small></td>
+            </tr><tr>
+                <td><strong>FIND-0064</strong></td>
+                <td><span style="background:#3b82f6;color:#fff;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:bold;">LOW</span></td>
+                <td>paws</td>
+                <td><strong>PATH entry D:\sqlite is writable (D:\sqlite)</strong><br><small style="color:#94a3b8;">hijackable_path</small></td>
+                <td><small style="color:#0f766e;">remove the directory from PATH or fix its permissions</small></td>
+            </tr><tr>
+                <td><strong>FIND-0065</strong></td>
+                <td><span style="background:#3b82f6;color:#fff;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:bold;">LOW</span></td>
+                <td>paws</td>
+                <td><strong>PATH entry D:\CDR is writable (D:\CDR)</strong><br><small style="color:#94a3b8;">hijackable_path</small></td>
+                <td><small style="color:#0f766e;">remove the directory from PATH or fix its permissions</small></td>
+            </tr><tr>
+                <td><strong>FIND-0066</strong></td>
+                <td><span style="background:#3b82f6;color:#fff;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:bold;">INFO</span></td>
+                <td>paws</td>
+                <td><strong>driver dump_dumpstorport.sys is resident but its image file is not on disk (crash-dump stack driver: expected)</strong><br><small style="color:#94a3b8;">byovd_deleted_driver_file</small></td>
+                <td><small style="color:#0f766e;">no action: Windows loads dump_*.sys into the crash-dump stack at boot, so the image is resident while absent from the filesystem</small></td>
+            </tr><tr>
+                <td><strong>FIND-0067</strong></td>
+                <td><span style="background:#3b82f6;color:#fff;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:bold;">INFO</span></td>
+                <td>paws</td>
+                <td><strong>driver dump_stornvme.sys is resident but its image file is not on disk (crash-dump stack driver: expected)</strong><br><small style="color:#94a3b8;">byovd_deleted_driver_file</small></td>
+                <td><small style="color:#0f766e;">no action: Windows loads dump_*.sys into the crash-dump stack at boot, so the image is resident while absent from the filesystem</small></td>
+            </tr><tr>
+                <td><strong>FIND-0068</strong></td>
+                <td><span style="background:#3b82f6;color:#fff;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:bold;">INFO</span></td>
+                <td>paws</td>
+                <td><strong>driver dump_dumpfve.sys is resident but its image file is not on disk (crash-dump stack driver: expected)</strong><br><small style="color:#94a3b8;">byovd_deleted_driver_file</small></td>
+                <td><small style="color:#0f766e;">no action: Windows loads dump_*.sys into the crash-dump stack at boot, so the image is resident while absent from the filesystem</small></td>
+            </tr><tr>
+                <td><strong>FIND-0069</strong></td>
+                <td><span style="background:#3b82f6;color:#fff;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:bold;">INFO</span></td>
+                <td>paws</td>
+                <td><strong>per-module taint and module load-time checks do not apply on this platform</strong><br><small style="color:#94a3b8;">partial_visibility</small></td>
+                <td><small style="color:#0f766e;">do not read the absence of those findings as a clean result; correlate driver provenance against the platform's own mechanisms (WDAC or the vulnerable-driver blocklist) instead</small></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>3. Incident Timeline Analysis</h2>
+    <table>
+        <thead>
+            <tr><th>Timestamp</th><th>Host</th><th>Event</th><th>Description</th><th>Evidence Ref</th></tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>2026-09-29T19:08:55.227104+00:00</code></td>
+                <td><strong>paws</strong></td>
+                <td><span style="background:#334155;color:#f8fafc;padding:2px 6px;border-radius:4px;font-size:11px;">PROCESS_RUNNING</span></td>
+                <td>Process [System Process] (PID 0)</td>
+                <td><small><code>EV-00002</code></small></td>
+            </tr><tr>
+                <td><code>2026-09-29T19:08:55.227112+00:00</code></td>
+                <td><strong>paws</strong></td>
+                <td><span style="background:#334155;color:#f8fafc;padding:2px 6px;border-radius:4px;font-size:11px;">PROCESS_RUNNING</span></td>
+                <td>Process System (PID 4)</td>
+                <td><small><code>EV-00002</code></small></td>
+            </tr><tr>
+                <td><code>2026-09-29T19:08:55.227116+00:00</code></td>
+                <td><strong>paws</strong></td>
+                <td><span style="background:#334155;color:#f8fafc;padding:2px 6px;border-radius:4px;font-size:11px;">PROCESS_RUNNING</span></td>
+                <td>Process Secure System (PID 188)</td>
+                <td><small><code>EV-00002</code></small></td>
+            </tr><tr>
+                <td><code>2026-09-29T19:08:55.227119+00:00</code></td>
+                <td><strong>paws</strong></td>
+                <td><span style="background:#334155;color:#f8fafc;padding:2px 6px;border-radius:4px;font-size:11px;">PROCESS_RUNNING</span></td>
+                <td>Process Registry (PID 232)</td>
+                <td><small><code>EV-00002</code></small></td>
+            </tr><tr>
+                <td><code>2026-09-29T19:08:55.227121+00:00</code></td>
+                <td><strong>paws</strong></td>
+                <td><span style="background:#334155;color:#f8fafc;padding:2px 6px;border-radius:4px;font-size:11px;">PROCESS_RUNNING</span></td>
+                <td>Process smss.exe (PID 776)</td>
+                <td><small><code>EV-00002</code></small></td>
+            </tr><tr>
+                <td><code>2026-09-29T19:08:55.227123+00:00</code></td>
+                <td><strong>paws</strong></td>
+                <td><span style="background:#334155;color:#f8fafc;padding:2px 6px;border-radius:4px;font-size:11px;">PROCESS_RUNNING</span></td>
+                <td>Process csrss.exe (PID 1296)</td>
+                <td><small><code>EV-00002</code></small></td>
+            </tr><tr>
+                <td><code>2026-09-29T19:08:55.227125+00:00</code></td>
+                <td><strong>paws</strong></td>
+                <td><span style="background:#334155;color:#f8fafc;padding:2px 6px;border-radius:4px;font-size:11px;">PROCESS_RUNNING</span></td>
+                <td>Process wininit.exe (PID 1504)</td>
+                <td><small><code>EV-00002</code></small></td>
+            </tr><tr>
+                <td><code>2026-09-29T19:08:55.227127+00:00</code></td>
+                <td><strong>paws</strong></td>
+                <td><span style="background:#334155;color:#f8fafc;padding:2px 6px;border-radius:4px;font-size:11px;">PROCESS_RUNNING</span></td>
+                <td>Process csrss.exe (PID 1512)</td>
+                <td><small><code>EV-00002</code></small></td>
+            </tr><tr>
+                <td><code>2026-09-29T19:08:55.227129+00:00</code></td>
+                <td><strong>paws</strong></td>
+                <td><span style="background:#334155;color:#f8fafc;padding:2px 6px;border-radius:4px;font-size:11px;">PROCESS_RUNNING</span></td>
+                <td>Process winlogon.exe (PID 1596)</td>
+                <td><small><code>EV-00002</code></small></td>
+            </tr><tr>
+                <td><code>2026-09-29T19:08:55.227131+00:00</code></td>
+                <td><strong>paws</strong></td>
+                <td><span style="background:#334155;color:#f8fafc;padding:2px 6px;border-radius:4px;font-size:11px;">PROCESS_RUNNING</span></td>
+                <td>Process services.exe (PID 1640)</td>
+                <td><small><code>EV-00002</code></small></td>
+            </tr><tr>
+                <td><code>2026-09-29T19:08:55.227133+00:00</code></td>
+                <td><strong>paws</strong></td>
+                <td><span style="background:#334155;color:#f8fafc;padding:2px 6px;border-radius:4px;font-size:11px;">PROCESS_RUNNING</span></td>
+                <td>Process LsaIso.exe (PID 1652)</td>
+                <td><small><code>EV-00002</code></small></td>
+            </tr><tr>
+                <td><code>2026-09-29T19:08:55.227135+00:00</code></td>
+                <td><strong>paws</strong></td>
+                <td><span style="background:#334155;color:#f8fafc;padding:2px 6px;border-radius:4px;font-size:11px;">PROCESS_RUNNING</span></td>
+                <td>Process lsass.exe (PID 1672)</td>
+                <td><small><code>EV-00002</code></small></td>
+            </tr><tr>
+                <td><code>2026-09-29T19:08:55.227137+00:00</code></td>
+                <td><strong>paws</strong></td>
+                <td><span style="background:#334155;color:#f8fafc;padding:2px 6px;border-radius:4px;font-size:11px;">PROCESS_RUNNING</span></td>
+                <td>Process svchost.exe (PID 1800)</td>
+                <td><small><code>EV-00002</code></small></td>
+            </tr><tr>
+                <td><code>2026-09-29T19:08:55.227141+00:00</code></td>
+                <td><strong>paws</strong></td>
+                <td><span style="background:#334155;color:#f8fafc;padding:2px 6px;border-radius:4px;font-size:11px;">PROCESS_RUNNING</span></td>
+                <td>Process fontdrvhost.exe (PID 1816)</td>
+                <td><small><code>EV-00002</code></small></td>
+            </tr><tr>
+                <td><code>2026-09-29T19:08:55.227143+00:00</code></td>
+                <td><strong>paws</strong></td>
+                <td><span style="background:#334155;color:#f8fafc;padding:2px 6px;border-radius:4px;font-size:11px;">PROCESS_RUNNING</span></td>
+                <td>Process fontdrvhost.exe (PID 1812)</td>
+                <td><small><code>EV-00002</code></small></td>
+            </tr><tr>
+                <td><code>2026-09-29T19:08:55.227145+00:00</code></td>
+                <td><strong>paws</strong></td>
+                <td><span style="background:#334155;color:#f8fafc;padding:2px 6px;border-radius:4px;font-size:11px;">PROCESS_RUNNING</span></td>
+                <td>Process svchost.exe (PID 1948)</td>
+                <td><small><code>EV-00002</code></small></td>
+            </tr><tr>
+                <td><code>2026-09-29T19:08:55.227147+00:00</code></td>
+                <td><strong>paws</strong></td>
+                <td><span style="background:#334155;color:#f8fafc;padding:2px 6px;border-radius:4px;font-size:11px;">PROCESS_RUNNING</span></td>
+                <td>Process svchost.exe (PID 1992)</td>
+                <td><small><code>EV-00002</code></small></td>
+            </tr><tr>
+                <td><code>2026-09-29T19:08:55.227149+00:00</code></td>
+                <td><strong>paws</strong></td>
+                <td><span style="background:#334155;color:#f8fafc;padding:2px 6px;border-radius:4px;font-size:11px;">PROCESS_RUNNING</span></td>
+                <td>Process dwm.exe (PID 1280)</td>
+                <td><small><code>EV-00002</code></small></td>
+            </tr><tr>
+                <td><code>2026-09-29T19:08:55.227151+00:00</code></td>
+                <td><strong>paws</strong></td>
+                <td><span style="background:#334155;color:#f8fafc;padding:2px 6px;border-radius:4px;font-size:11px;">PROCESS_RUNNING</span></td>
+                <td>Process svchost.exe (PID 2100)</td>
+                <td><small><code>EV-00002</code></small></td>
+            </tr><tr>
+                <td><code>2026-09-29T19:08:55.227152+00:00</code></td>
+                <td><strong>paws</strong></td>
+                <td><span style="background:#334155;color:#f8fafc;padding:2px 6px;border-radius:4px;font-size:11px;">PROCESS_RUNNING</span></td>
+                <td>Process svchost.exe (PID 2108)</td>
+                <td><small><code>EV-00002</code></small></td>
+            </tr><tr>
+                <td><code>2026-09-29T19:08:55.227154+00:00</code></td>
+                <td><strong>paws</strong></td>
+                <td><span style="background:#334155;color:#f8fafc;padding:2px 6px;border-radius:4px;font-size:11px;">PROCESS_RUNNING</span></td>
+                <td>Process svchost.exe (PID 2132)</td>
+                <td><small><code>EV-00002</code></small></td>
+            </tr><tr>
+                <td><code>2026-09-29T19:08:55.227156+00:00</code></td>
+                <td><strong>paws</strong></td>
+                <td><span style="background:#334155;color:#f8fafc;padding:2px 6px;border-radius:4px;font-size:11px;">PROCESS_RUNNING</span></td>
+                <td>Process svchost.exe (PID 2208)</td>
+                <td><small><code>EV-00002</code></small></td>
+            </tr><tr>
+                <td><code>2026-09-29T19:08:55.227158+00:00</code></td>
+                <td><strong>paws</strong></td>
+                <td><span style="background:#334155;color:#f8fafc;padding:2px 6px;border-radius:4px;font-size:11px;">PROCESS_RUNNING</span></td>
+                <td>Process svchost.exe (PID 2352)</td>
+                <td><small><code>EV-00002</code></small></td>
+            </tr><tr>
+                <td><code>2026-09-29T19:08:55.227159+00:00</code></td>
+                <td><strong>paws</strong></td>
+                <td><span style="background:#334155;color:#f8fafc;padding:2px 6px;border-radius:4px;font-size:11px;">PROCESS_RUNNING</span></td>
+                <td>Process svchost.exe (PID 2360)</td>
+                <td><small><code>EV-00002</code></small></td>
+            </tr><tr>
+                <td><code>2026-09-29T19:08:55.227161+00:00</code></td>
+                <td><strong>paws</strong></td>
+                <td><span style="background:#334155;color:#f8fafc;padding:2px 6px;border-radius:4px;font-size:11px;">PROCESS_RUNNING</span></td>
+                <td>Process svchost.exe (PID 2368)</td>
+                <td><small><code>EV-00002</code></small></td>
+            </tr><tr>
+                <td><code>2026-09-29T19:08:55.227163+00:00</code></td>
+                <td><strong>paws</strong></td>
+                <td><span style="background:#334155;color:#f8fafc;padding:2px 6px;border-radius:4px;font-size:11px;">PROCESS_RUNNING</span></td>
+                <td>Process svchost.exe (PID 2376)</td>
+                <td><small><code>EV-00002</code></small></td>
+            </tr><tr>
+                <td><code>2026-09-29T19:08:55.227165+00:00</code></td>
+                <td><strong>paws</strong></td>
+                <td><span style="background:#334155;color:#f8fafc;padding:2px 6px;border-radius:4px;font-size:11px;">PROCESS_RUNNING</span></td>
+                <td>Process svchost.exe (PID 2384)</td>
+                <td><small><code>EV-00002</code></small></td>
+            </tr><tr>
+                <td><code>2026-09-29T19:08:55.227169+00:00</code></td>
+                <td><strong>paws</strong></td>
+                <td><span style="background:#334155;color:#f8fafc;padding:2px 6px;border-radius:4px;font-size:11px;">PROCESS_RUNNING</span></td>
+                <td>Process svchost.exe (PID 2392)</td>
+                <td><small><code>EV-00002</code></small></td>
+            </tr><tr>
+                <td><code>2026-09-29T19:08:55.227171+00:00</code></td>
+                <td><strong>paws</strong></td>
+                <td><span style="background:#334155;color:#f8fafc;padding:2px 6px;border-radius:4px;font-size:11px;">PROCESS_RUNNING</span></td>
+                <td>Process svchost.exe (PID 2400)</td>
+                <td><small><code>EV-00002</code></small></td>
+            </tr><tr>
+                <td><code>2026-09-29T19:08:55.227172+00:00</code></td>
+                <td><strong>paws</strong></td>
+                <td><span style="background:#334155;color:#f8fafc;padding:2px 6px;border-radius:4px;font-size:11px;">PROCESS_RUNNING</span></td>
+                <td>Process svchost.exe (PID 2576)</td>
+                <td><small><code>EV-00002</code></small></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>4. Evidence Chain &amp; Forensic Hashes</h2>
+    <table>
+        <thead>
+            <tr><th>Evidence ID</th><th>Host</th><th>Artifact</th><th>SHA-256 Digest</th><th>Size</th></tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>EV-00001</code></td>
+                <td>paws</td>
+                <td><strong>system_info</strong></td>
+                <td><code>73d21b0756f244dd669291fdabdfdcf98a610685717f0d4996d1b41dc18107ff</code></td>
+                <td>836 bytes</td>
+            </tr><tr>
+                <td><code>EV-00002</code></td>
+                <td>paws</td>
+                <td><strong>process_table</strong></td>
+                <td><code>ac7793d034650a8d659ab7f74965f6dd2956b0a680c737c983e08982490d3824</code></td>
+                <td>417665 bytes</td>
+            </tr><tr>
+                <td><code>EV-00003</code></td>
+                <td>paws</td>
+                <td><strong>network_connections</strong></td>
+                <td><code>2f6368a844e63dc7cd25d663893708f5c39b5b8a9f8be9492a43cc30cc75972f</code></td>
+                <td>90625 bytes</td>
+            </tr><tr>
+                <td><code>EV-00004</code></td>
+                <td>paws</td>
+                <td><strong>system_info</strong></td>
+                <td><code>46eabda6cb4f82db7c104d426d271d98f3cdf493b4e2c539fc66608b2e7f5eb2</code></td>
+                <td>836 bytes</td>
+            </tr><tr>
+                <td><code>EV-00005</code></td>
+                <td>paws</td>
+                <td><strong>process_table</strong></td>
+                <td><code>120bb2c67844b94e4f77656ae380f1c4a4032a985f01abcf759821df87551876</code></td>
+                <td>417664 bytes</td>
+            </tr><tr>
+                <td><code>EV-00006</code></td>
+                <td>paws</td>
+                <td><strong>network_connections</strong></td>
+                <td><code>0635d3d679775e1769745f0c46378df0e98e6e393c9e208ec9dc13c25c8a1188</code></td>
+                <td>90628 bytes</td>
+            </tr><tr>
+                <td><code>EV-00007</code></td>
+                <td>paws</td>
+                <td><strong>system_info</strong></td>
+                <td><code>e96a5621265dc9fb44b1506e7b44713973412830e4ca4fe95d40719e4a189655</code></td>
+                <td>836 bytes</td>
+            </tr><tr>
+                <td><code>EV-00008</code></td>
+                <td>paws</td>
+                <td><strong>process_table</strong></td>
+                <td><code>db590a9686e2e99d4b4c568bbf0aac3c4430fb2c028eb4407ab89d09aa850eba</code></td>
+                <td>417658 bytes</td>
+            </tr><tr>
+                <td><code>EV-00009</code></td>
+                <td>paws</td>
+                <td><strong>network_connections</strong></td>
+                <td><code>98932df8365cb0042eba5c84cf0e804a4a016693d10e7eaa33327b9a8bca1a05</code></td>
+                <td>90624 bytes</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="custody">
+        <h4 style="margin:0 0 8px 0; color:#38bdf8;">Chain of Custody Head</h4>
+        <p style="margin:0; font-size:13px; color:#94a3b8;">Head Hash: <code>2710b2b33e6a627da11cac34984550a7ff127a739e7e7b08844e972a6643c19d</code></p>
+        <p style="margin:5px 0 0 0; font-size:12px; color:#64748b;">Cryptographically chained and signed. Any byte modification to collected evidence invalidates the manifest head.</p>
+    </div>
+</div>
+</body>
+</html>

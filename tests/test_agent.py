@@ -195,6 +195,8 @@ def test_poll_without_work_returns_no_content(management_server):
 
 def test_agent_state_is_owner_only(management_server, tmp_path):
     """The state directory holds the pinned fingerprint and the job journal."""
+    if os.name == "nt":
+        pytest.skip("POSIX permission bits do not apply on Windows")
     import stat as stat_mod
 
     state = tmp_path / "hardened-state"

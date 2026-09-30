@@ -1,0 +1,11 @@
+[package]
+name = "jocky-ir"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+description = "Intermediate Representation (IR) for JOCKY forensic instructions"
+
+[dependencies]
+serde = { workspace = true }
+jocky-ast = { path = "../jocky-ast" }

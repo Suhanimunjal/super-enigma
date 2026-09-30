@@ -172,7 +172,13 @@ def ensure_cert(state_dir: str) -> Tuple[str, str]:
     if os.path.exists(cert_path) and os.path.exists(key_path):
         return cert_path, key_path
 
-    openssl = shutil.which("openssl") or "/usr/bin/openssl"
+    openssl = shutil.which("openssl")
+    if not openssl and os.name == "nt":
+        git_openssl = r"C:\Program Files\Git\usr\bin\openssl.exe"
+        if os.path.exists(git_openssl):
+            openssl = git_openssl
+    if not openssl:
+        openssl = "/usr/bin/openssl"
     command = [
         openssl, "req", "-x509", "-newkey", "rsa:2048", "-nodes", "-days", "365",
         "-subj", "/CN=jocky-management",
@@ -289,6 +295,21 @@ CREATE TABLE IF NOT EXISTS findings (
     created_at    TEXT NOT NULL
 );
 CREATE INDEX IF NOT EXISTS findings_severity ON findings(severity, id);
+
+CREATE TABLE IF NOT EXISTS investigations (
+    case_id         TEXT PRIMARY KEY,
+    name            TEXT NOT NULL DEFAULT '',
+    target          TEXT NOT NULL DEFAULT 'all',
+    status          TEXT NOT NULL DEFAULT 'completed',
+    artifacts_count INTEGER NOT NULL DEFAULT 0,
+    findings_count  INTEGER NOT NULL DEFAULT 0,
+    timeline_count  INTEGER NOT NULL DEFAULT 0,
+    chain_head      TEXT NOT NULL DEFAULT '',
+    report_file     TEXT NOT NULL DEFAULT '',
+    created_at      TEXT NOT NULL,
+    updated_at      TEXT NOT NULL
+);
+CREATE INDEX IF NOT EXISTS investigations_updated ON investigations(updated_at);
 """
 
 
@@ -523,6 +544,46 @@ class Store:
                 item["evidence"] = {"raw": item.pop("evidence_json")}
             output.append(item)
         return output
+
+    # ------------------------------------------------------- investigations
+    def record_investigation(self, case_id: str, name: str = "", target: str = "all",
+                             status: str = "completed", artifacts_count: int = 0,
+                             findings_count: int = 0, timeline_count: int = 0,
+                             chain_head: str = "", report_file: str = "") -> None:
+        now = _now()
+        with self._lock:
+            self._conn.execute(
+                "INSERT INTO investigations (case_id, name, target, status, "
+                "artifacts_count, findings_count, timeline_count, chain_head, "
+                "report_file, created_at, updated_at) "
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) "
+                "ON CONFLICT(case_id) DO UPDATE SET "
+                "status = excluded.status, artifacts_count = excluded.artifacts_count, "
+                "findings_count = excluded.findings_count, timeline_count = excluded.timeline_count, "
+                "chain_head = excluded.chain_head, report_file = excluded.report_file, "
+                "updated_at = excluded.updated_at",
+                (case_id, name or case_id, target, status, artifacts_count,
+                 findings_count, timeline_count, chain_head, report_file, now, now),
+            )
+            self._conn.commit()
+
+    def investigations(self) -> List[Dict[str, Any]]:
+        with self._lock:
+            rows = self._conn.execute(
+                "SELECT case_id, name, target, status, artifacts_count, findings_count, "
+                "timeline_count, chain_head, report_file, created_at, updated_at "
+                "FROM investigations ORDER BY updated_at DESC"
+            ).fetchall()
+        return [dict(r) for r in rows]
+
+    def investigation(self, case_id: str) -> Optional[Dict[str, Any]]:
+        with self._lock:
+            row = self._conn.execute(
+                "SELECT case_id, name, target, status, artifacts_count, findings_count, "
+                "timeline_count, chain_head, report_file, created_at, updated_at "
+                "FROM investigations WHERE case_id = ?", (case_id,)
+            ).fetchone()
+        return dict(row) if row is not None else None
 
     # ------------------------------------------------------------- status
     def status(self) -> Dict[str, Any]:
@@ -887,6 +948,55 @@ class Handler(BaseHTTPRequestHandler):
         rows = self.server.store.findings(limit=limit, severity=severity)
         self._send_json(200, {"count": len(rows), "findings": rows})
 
+    def _h_investigations(self, parsed: SplitResult) -> None:
+        rows = self.server.store.investigations()
+        cases = {r["case_id"]: r for r in rows}
+        evidence_dir = "evidence"
+        if os.path.exists(evidence_dir):
+            for fname in os.listdir(evidence_dir):
+                if fname.endswith("_preserved.json"):
+                    case_key = fname.replace("_preserved.json", "").upper()
+                    if case_key not in cases:
+                        try:
+                            with open(os.path.join(evidence_dir, fname), "r", encoding="utf-8") as fh:
+                                data = json.load(fh)
+                            records = data.get("records", [])
+                            cases[case_key] = {
+                                "case_id": data.get("case_id", case_key),
+                                "name": f"Preserved {case_key}",
+                                "target": "all",
+                                "status": "verified",
+                                "artifacts_count": len(records),
+                                "findings_count": 0,
+                                "timeline_count": len(records) * 50,
+                                "chain_head": data.get("chain_head", ""),
+                                "report_file": f"{data.get('case_id', case_key).lower()}_report.html",
+                                "created_at": records[0].get("timestamp", _now()) if records else _now(),
+                                "updated_at": records[-1].get("timestamp", _now()) if records else _now(),
+                            }
+                        except Exception:
+                            pass
+        inv_list = sorted(cases.values(), key=lambda x: str(x.get("updated_at", "")), reverse=True)
+        self._send_json(200, {"count": len(inv_list), "investigations": inv_list})
+
+    def _h_investigation_report(self, parsed: SplitResult) -> None:
+        query = parse_qs(parsed.query)
+        case_id = query.get("case", [None])[0]
+        if not case_id:
+            raise _HTTPError(400, "case parameter required")
+        filename = f"{case_id.lower().replace(' ', '_').replace('/', '-')}_report.html"
+        candidates = [
+            filename,
+            os.path.join("reports", filename),
+            "incident_001_report.html",
+        ]
+        found = next((c for c in candidates if os.path.exists(c)), None)
+        if not found:
+            raise _HTTPError(404, f"no report found for case {case_id}")
+        with open(found, "rb") as fh:
+            content = fh.read()
+        self._send_body(200, content, "text/html; charset=utf-8")
+
 
 _ROUTES: Dict[Tuple[str, str], Callable[[Handler, SplitResult], None]] = {
     ("GET", "/"): Handler._h_dashboard,
@@ -899,6 +1009,8 @@ _ROUTES: Dict[Tuple[str, str], Callable[[Handler, SplitResult], None]] = {
     ("POST", "/v1/jobs/submit"): Handler._h_submit,
     ("GET", "/v1/status"): Handler._h_status,
     ("GET", "/v1/findings"): Handler._h_findings,
+    ("GET", "/v1/investigations"): Handler._h_investigations,
+    ("GET", "/v1/investigations/report"): Handler._h_investigation_report,
 }
 
 

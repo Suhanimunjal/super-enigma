@@ -1,0 +1,21 @@
+# Incident Response Playbook: INC-2026-001
+case "INC-2026-001"
+
+target all
+
+collect {
+    system
+    processes
+    network
+}
+
+analyze {
+    suspicious_processes
+    suspicious_network
+}
+
+timeline
+
+verify evidence
+
+report html "incident_001_report.html"

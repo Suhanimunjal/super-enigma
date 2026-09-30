@@ -33,7 +33,10 @@ from jocky.rt.builtins import default_natives
 from jocky.rt.filefs import grep_file, read_bytes, strings, entropy
 from jocky.rt.pattern import compile_pattern
 from jocky.runner import compile_source, run_source, run_artifact, build_artifact
-from tests.test_harness_framework import (
+_TESTS_DIR = str(pathlib.Path(__file__).resolve().parent)
+if _TESTS_DIR not in sys.path:
+    sys.path.insert(0, _TESTS_DIR)
+from test_harness_framework import (
     GenerativeLanguageFuzzer,
     MetamorphicTransformer,
     benchmark_microsecond,

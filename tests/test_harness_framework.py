@@ -17,7 +17,10 @@ import json
 import os
 import pathlib
 import random
-import resource
+try:
+    import resource
+except ImportError:
+    resource = None
 import struct
 import sys
 import time

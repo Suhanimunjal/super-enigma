@@ -1,0 +1,104 @@
+# JOCKY 2.1 — Full Incident Response Investigation
+# Demonstrates: investigation block, profile, rule engine, variables, if/for
+
+case "INC-2026-001"
+
+target all
+
+# ── Detection Rule Definitions ─────────────────────────────────────────────
+rule suspicious_process {
+    when process.parent == "explorer.exe"
+    severity high
+    message "Suspicious child process spawned from explorer"
+}
+
+rule c2_connection {
+    when network.remote_port == 4444
+    severity critical
+    message "Potential C2 beacon detected on port 4444"
+}
+
+# ── Profile Definitions ────────────────────────────────────────────────────
+profile "quick_triage" {
+    collect {
+        system
+        processes
+        network
+        users
+    }
+    analyze {
+        suspicious_processes
+        suspicious_network
+    }
+}
+
+profile "full_forensics" {
+    collect {
+        system
+        users
+        processes
+        services
+        network
+        startup_items
+        event_logs
+    }
+    analyze {
+        suspicious_processes
+        suspicious_network
+        persistence
+        unsigned_binaries
+        suspicious_files
+    }
+}
+
+# ── Phase 1: Quick Triage ──────────────────────────────────────────────────
+run profile "quick_triage"
+
+# ── Phase 2: Structured Investigation Block ────────────────────────────────
+investigation {
+
+    collect {
+        system
+        users
+        processes
+        services
+        filesystem
+        network
+        event_logs
+    }
+
+    analyze {
+        suspicious_processes
+        suspicious_network
+        persistence
+        suspicious_files
+    }
+
+    timeline {
+        processes
+        filesystem
+        network
+        events
+    }
+
+    verify evidence
+}
+
+# ── Phase 3: Alert on findings ────────────────────────────────────────────
+generate alert
+
+# ── Phase 4: Preserve evidence to disk ───────────────────────────────────
+preserve evidence
+
+# ── Phase 5: Generate Comprehensive Report ────────────────────────────────
+report {
+    format html
+    include executive_summary
+    include findings
+    include timeline
+    include evidence
+    include chain_of_custody
+    include network_analysis
+    include process_analysis
+    include persistence_analysis
+}

@@ -1,0 +1,12 @@
+[package]
+name = "jocky-parser"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+description = "Recursive-descent parser for JOCKY forensic language"
+
+[dependencies]
+thiserror = { workspace = true }
+jocky-ast = { path = "../jocky-ast" }
+jocky-lexer = { path = "../jocky-lexer" }

@@ -808,8 +808,8 @@ def triage(deep: bool = False, max_pids: int = 400) -> Dict[str, Any]:
                     "sockets": len(netfs.connections(with_process=False)),
                     "unreadable_processes": len(unreadable),
                     "coverage": coverage},
-        "host": {"hostname": os.uname().nodename,
-                 "kernel": os.uname().release,
+        "host": {"hostname": sysinfo.kernel()["hostname"],
+                 "kernel": sysinfo.kernel()["release"],
                  "boot_time": procfs.boot_time()},
         "duration_ms": round((time.perf_counter() - started) * 1000, 3),
     }

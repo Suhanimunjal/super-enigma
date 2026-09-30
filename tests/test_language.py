@@ -9,6 +9,7 @@ regions, error propagation and the interpreter's safety limits.
 """
 from __future__ import annotations
 
+import os
 import pathlib
 import sys
 
@@ -344,7 +345,8 @@ def test_wall_clock_budget_is_enforced():
 def test_a_long_native_cannot_silently_overrun_the_budget():
     """Regression: the deadline was sampled only between VM steps, so one long
     native ran past the budget and still reported truncated: false."""
-    result = run('emit ioc.match({"names": ["nothing"]}, "/usr", 4000)', wall_clock_ms=5)
+    target = "C:\\\\Windows" if os.name == "nt" else "/usr"
+    result = run(f'emit ioc.match({{"names": ["nothing"]}}, "{target}", 4000)', wall_clock_ms=5)
     assert result.truncated, "a native that outlives the budget must be reported"
 
 
